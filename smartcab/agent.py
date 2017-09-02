@@ -102,7 +102,7 @@ class LearningAgent(Agent):
             when conducting learning. """
 
         if self.learning:
-            self.Q[state][action] = (self.alpha * self.Q[state][action]) + reward
+            self.Q[state][action] = self.Q[state][action] + self.alpha * (reward - self.Q[state][action])
         return
 
 
