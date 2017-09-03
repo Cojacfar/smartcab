@@ -16086,8 +16086,8 @@ SUVORK5CYII=
 <th><em>light</em></th>
 <th><em>left</em></th>
 <th><em>oncoming</em></th>
-<th><strong>Policy</strong></th>
-<th style="text-align:right"><em>Forward</em></th>
+<th><strong>Optimal Policy</strong></th>
+<th style="text-align:right"><strong>Q Values:</strong> <em>Forward</em></th>
 <th style="text-align:right"><em>Right</em></th>
 <th style="text-align:right"><em>None</em></th>
 <th style="text-align:right"><em>Left</em></th>
@@ -16156,7 +16156,10 @@ SUVORK5CYII=
 </tr>
 </tbody>
 </table>
-<p>For <em>right, red, none, forward</em> the maximum policy my learner found was to do nothing. I suspect that we didn't run across enough training states in this example, and sometimes the oncoming traffic was turning left. If that's the case, then we want to go right and not wait! Expectingly, <em>Forward</em> was only slightly ahead of turning <em>Right</em>.</p>
+<p>For <strong>right, red, none, forward</strong> the maximum policy my learner found was to do nothing. I suspect that we didn't run across enough training states in this example, as the values between <em>right</em> and <em>none</em> are fairly close. Since <em>none</em> would still receive a reward (just not quite as big as right), it would take some time for the correct value to come out. Expectingly, <em>none</em> was only slightly ahead of turning <em>right</em>.</p>
+<p>The optimal policy can be defined by following traffic laws. I visualize this as a decision tree, with the first node being based on a red or green light.</p>
+<p>A <strong>red</strong> light means that you can only make a right turn (if the waypoint is pointing that direction). The caveat is if left traffic is going straight, you cannot turn <em>right</em>. So unless the waypoint is to the <em>right</em> and there is no left traffic going forward, at a <strong>red</strong> light, the correct action is <em>none</em>.</p>
+<p>A <strong>green</strong> light opens up more possibilities. Now I should head towards the waypoint in all cases except that of a <em>left</em> waypoint direction. If I need to head <em>left</em>, it depends on the <em>oncoming</em> traffic. If the <em>oncoming</em> traffic is going forward or right, the correct action is <em>none</em>. Otherwise, I should head the direction of the <em>waypoint</em>.</p>
 
 </div>
 </div>
